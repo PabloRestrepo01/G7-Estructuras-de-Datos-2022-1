@@ -12,7 +12,7 @@ def imprimirColaArrastre(cola):
         print('{:<13}'.format('Vacía'))
 
 def imprimirTorreFiguras(torre, n):
-    print('Torre de figuras ' + str(n) + ':', end = ' ')
+    print('Torre de figura ' + str(n) + ':', end = ' ')
     
     if len(torre) > 0:
         print('{:<9}'.format(torre[-1].getTipo()), '{:>2}'.format(torre[-1].getRepresentacion()))
@@ -35,12 +35,13 @@ def imprimirJuego(juego):
     print()
     imprimirColaArrastre(juego.colaArrastre)
     print()
+    
     for i in range(7):
         imprimirColumna(juego.columnas[i], i + 1)
 
 if __name__ == "__main__":
     juego = Juego()
-    juego.llenarCola()
+    juego.llenarMazo()
     juego.llenarColumnas()
     accion = 0
         
@@ -57,49 +58,57 @@ if __name__ == "__main__":
         print('7. Llevar Z cartas de la Columna X a la columna Y')
         print('8. Salir del juego')
         
-        accion = int(input())
+        accion = input()
         
-        if accion == 1:
+        if accion == '1':
             juego.destaparColaArrastre()
             
-        elif accion == 2:
-            pass
-        elif accion == 3:
+        elif accion == '2':
+            juego.reiniciarColaArrastre()
+        elif accion == '3':
             print('Ingrese el valor de X:', end = ' ')
-            x = int(input())
+            x = input()
             juego.colaATorre(x)
             
-        elif accion == 4:
+        elif accion == '4':
             print('Ingrese el valor de Y:', end = ' ')
-            y = int(input())
+            y = input()
             juego.colaAColumna(y)
             
-        elif accion == 5:
+        elif accion == '5':
             print('Ingrese el valor de Y:', end = ' ')
-            y = int(input())
+            y = input()
             print('Ingrese el valor de X:', end = ' ')
-            x = int(input())
+            x = input()
             juego.columnaATorre(x, y)
 
-        elif accion == 6:
+        elif accion == '6':
             print('Ingrese el valor de Y:', end = ' ')
-            y = int(input())
+            y = input()
             print('Ingrese el valor de X:', end = ' ')
-            x = int(input())
+            x = input()
             juego.torreAColumna(x, y)
             
-        elif accion == 7:
+        elif accion == '7':
             print('Ingrese el valor de Z:', end = ' ')
-            z = int(input())
+            z = input()
             print('Ingrese el valor de X:', end = ' ')
-            x = int(input())
+            x = input()
             print('Ingrese el valor de Y:', end = ' ')
-            y = int(input())
+            y = input()
             juego.columnaAColumna(z, x, y)
             
-        elif accion == 8:
+        elif accion == '8':
             break
         else:
-            print('Acción inválida')
+            print('\nAcción inválida')
+        
+        if (len(juego.torresFiguras[0]) == 13 and
+        len(juego.torresFiguras[1]) == 13 and
+        len(juego.torresFiguras[2]) == 13 and
+        len(juego.torresFiguras[3]) == 13):
+            
+            print('Juego completado')
+            break
         
         print()
